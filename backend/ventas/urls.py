@@ -1,0 +1,45 @@
+from django.urls import path
+
+from .views import (
+    ConfirmarAnulacionView,
+    DarDeBajaUsuarioView,
+    ExportarExcelView,
+    HistorialVentasView,
+    LoginView,
+    LogoutView,
+    MedioPagoListView,
+    MisVentasView,
+    ProductoDetailView,
+    ProductoListCreateView,
+    RestituirVentaView,
+    ResumenView,
+    SolicitarAnulacionView,
+    UsuarioListCreateView,
+    VentaCreateView,
+    VentasPorAnularView,
+    VerifyPinView,
+)
+
+urlpatterns = [
+    path('auth/login/', LoginView.as_view(), name='login'),
+    path('auth/logout/', LogoutView.as_view(), name='logout'),
+    path('auth/verify-pin/', VerifyPinView.as_view(), name='verify-pin'),
+    path('medios-pago/', MedioPagoListView.as_view(), name='medios-pago'),
+    path('productos/', ProductoListCreateView.as_view(), name='productos-list'),
+    path('productos/<int:pk>/', ProductoDetailView.as_view(), name='productos-detail'),
+    path('ventas/', VentaCreateView.as_view(), name='ventas-create'),
+    path('ventas/mis-ventas/', MisVentasView.as_view(), name='mis-ventas'),
+    path('ventas/por-anular/', VentasPorAnularView.as_view(), name='ventas-por-anular'),
+    path('ventas/historial/', HistorialVentasView.as_view(), name='ventas-historial'),
+    path('ventas/exportar-excel/', ExportarExcelView.as_view(), name='ventas-exportar-excel'),
+    path(
+        'ventas/<int:pk>/solicitar-anulacion/',
+        SolicitarAnulacionView.as_view(),
+        name='solicitar-anulacion',
+    ),
+    path('ventas/<int:pk>/anular/', ConfirmarAnulacionView.as_view(), name='confirmar-anulacion'),
+    path('ventas/<int:pk>/restituir/', RestituirVentaView.as_view(), name='restituir-venta'),
+    path('resumen/', ResumenView.as_view(), name='resumen'),
+    path('usuarios/', UsuarioListCreateView.as_view(), name='usuarios-list'),
+    path('usuarios/<int:pk>/dar-de-baja/', DarDeBajaUsuarioView.as_view(), name='usuarios-baja'),
+]
